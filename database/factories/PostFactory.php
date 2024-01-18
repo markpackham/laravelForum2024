@@ -23,6 +23,9 @@ class PostFactory extends Factory
             // Wrap in string helper so sentences will have a full stop at the end
             // Use title for title case so letters get capitalized & be nicely formatted
             'title' => str(fake()->sentence)->beforeLast('.')->title(),
+            // Instead of Lorem Ipsum which is the default it is also possible to use
+            // realText() which takes texts from books instead of using paragraphs()
+            'body' => fake()->paragraphs(3, true),
         ];
     }
 }
