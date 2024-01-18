@@ -20,6 +20,9 @@ class PostFactory extends Factory
         return [
             // Don't need to call create() since Laravel automatically only class it when necessary
             'user_id' => User::factory(),
+            // Wrap in string helper so sentences will have a full stop at the end
+            // Use title for title case so letters get capitalized & be nicely formatted
+            'title' => str(fake()->sentence)->beforeLast('.')->title(),
         ];
     }
 }
