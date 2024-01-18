@@ -21,6 +21,8 @@ class CommentFactory extends Factory
         return [
             'user_id' => User::factory(),
             'post_id' => Post::factory(),
+            // Demo use of realText taken from books rather than Lorem Ipsum paragraphs
+            'body' => fake()->realText(250),
         ];
     }
 }
