@@ -30,9 +30,13 @@ class DatabaseSeeder extends Seeder
         // Associate comments with pre-existing users & pre-existing posts
         $comments = Comment::factory(100)->recycle($users)->recycle($posts)->create();
 
-        $admin = User::factory()->create([
+        $admin = User::factory()
+        ->has(Post::factory(45))
+        // Comment only on pre-existing posts rather than creating new ones
+        ->has(Comment::factory(100)->recycle($posts))
+        ->create([
             'name' => 'Mark',
-            'email' => 'markpackham1@gmail.com',
+            'email' => 'admin@email.com',
         ]);
     }
 }
