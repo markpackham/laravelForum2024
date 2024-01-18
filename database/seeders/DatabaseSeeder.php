@@ -13,14 +13,17 @@ class DatabaseSeeder extends Seeder
      */
 
      // php artisan db:seed
+     // OR php artisan migrate:fresh --seed
+     // Do we want to clear out the database and migrate it again "fresh" to avoid
+     // issues with duplicate email address or my test admin 'markpackham1@gmail.com' will cause problems
     public function run(): void
     {
         // Create 10 random users
         $users = User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $admin = User::factory()->create([
+            'name' => 'Mark',
+            'email' => 'markpackham1@gmail.com',
+        ]);
     }
 }
