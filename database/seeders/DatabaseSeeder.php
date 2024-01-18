@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Comment;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -20,6 +22,13 @@ class DatabaseSeeder extends Seeder
     {
         // Create 10 random users
         $users = User::factory(10)->create();
+
+        // Associate users with the posts, use random user from collection I created via $users
+        // This prevents Laravel from creating brand new users just to meet the posting criteria
+        $posts = Post::factory(200)->recycle($users)->create();
+
+        // Associate comments with pre-existing users & pre-existing posts
+        $comments = Comment::factory(100)->recycle($users)->recycle($posts)->create();
 
         $admin = User::factory()->create([
             'name' => 'Mark',
