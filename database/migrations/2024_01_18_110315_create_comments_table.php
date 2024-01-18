@@ -18,7 +18,9 @@ return new class extends Migration
             // A user creates a comment so we need to restrict user deletions on their existing comments
             $table->foreignIdFor(User::class)->constrained()->restrictOnDelete();
             // A comment is associated with a post
-            $table->foreignIdFor(Post::class);
+            // when a post is deleted then all associated comments get deleted
+            $table->foreignIdFor(Post::class)->constrained()->cascadeOnDelete();
+            $table->longText('body');
             $table->timestamps();
         });
     }
